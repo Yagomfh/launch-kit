@@ -1,8 +1,8 @@
 import inquirer from "inquirer";
-import { copyBackend } from "./backend.js";
 import fs from "fs";
+import { copyBackend } from "./backend";
 
-const init = async () => {
+const initAction = async () => {
   const answers = await inquirer.prompt([
     {
       type: "input",
@@ -68,4 +68,4 @@ const init = async () => {
   console.log(`cd ${answers.name}`);
 };
 
-export { init };
+export { initAction };

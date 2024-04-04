@@ -7,7 +7,7 @@ import fs from "fs";
  * @param {string} __dirname
  * @param {minimist.ParsedArgs} argv
  */
-const addDocker = async (__dirname, argv) => {
+const addDocker = async (__dirname: string, argv) => {
   Plop.prepare(
     {
       cwd: argv.cwd,

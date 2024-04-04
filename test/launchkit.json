@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "backend": {
+    "type": "strapi",
+    "directory": "api"
+  },
+  "frontend": {
+    "type": "vite-react",
+    "directory": "web"
+  }
+}
