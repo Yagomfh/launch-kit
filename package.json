@@ -1,0 +1,35 @@
+{
+  "name": "launchkit-cli",
+  "version": "1.0.1",
+  "description": "CLI to generate boilerplate code to quickly launch your first product",
+  "repository": "https://github.com/Yagomfh/launch-kit",
+  "homepage": "https://github.com/Yagomfh/launch-kit#readme",
+  "main": "index.js",
+  "author": "Yago Mfh <yagomfh@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "setup": "npm install -g ."
+  },
+  "engines": {
+    "node": "=20"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.17",
+    "typescript": "^5.4.3",
+    "yargs": "^17.7.2"
+  },
+  "keywords": [
+    "cli",
+    "npmtool"
+  ],
+  "bin": {
+    "launch-kit": "index.js"
+  },
+  "preferGlobal": true,
+  "devDependencies": {
+    "plop": "^4.0.1"
+  }
+}
