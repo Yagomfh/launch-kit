@@ -7,7 +7,7 @@ CLI to generate boilerplate code to quickly launch your first product
 Use the `init` command to initialize a new project.
 
 ```bash
-npx launchkit-cli init
+npx launchkit-cli@latest init
 ```
 
 ## add
@@ -15,7 +15,7 @@ npx launchkit-cli init
 Use the `add` command to add features to your project.
 
 ```bash
-npx launchkit-cli add [feature]
+npx launchkit-cli@latest add [feature]
 ```
 
 ### Features
@@ -25,7 +25,7 @@ npx launchkit-cli add [feature]
 ### Example
 
 ```bash
-npx launchkit-cli add docker
+npx launchkit-cli@latest add docker
 ```
 
 ## License
