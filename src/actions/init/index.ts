@@ -1,23 +1,31 @@
 import inquirer from "inquirer";
 import fs from "fs";
+import { prompt } from "enquirer";
 import { copyBackend } from "./backend";
+// import { copyBackend } from "./backend";
 
 const initAction = async () => {
-  const answers = await inquirer.prompt([
+  const answers: {
+    name: string;
+    backend: "nest" | "strapi";
+    frontend: "vite-react" | "nextjs";
+  } = await prompt([
     {
       type: "input",
       name: "name",
       message: "Your app name:",
     },
     {
-      type: "list",
+      type: "select",
       name: "backend",
+      initial: 0,
       message: "Choose your backend:",
-      choices: ["nest", "strapi"],
+      choices: ["strapi", "nest"],
     },
     {
-      type: "list",
+      type: "select",
       name: "frontend",
+      initial: 0,
       message: "Choose your frontend:",
       choices: ["vite-react", "nextjs"],
     },
@@ -51,8 +59,6 @@ const initAction = async () => {
 
   // Create a backend directory
   fs.mkdirSync(`${answers.name}/apps/api`);
-
-  // Copy boilerplate backend code
   copyBackend(answers.name, answers.backend);
 
   // Create a frontend directory

@@ -1,0 +1,2 @@
+# Reclassify hygen ejs.t templates as EJS language
+*.ejs.t linguist-language=EJS

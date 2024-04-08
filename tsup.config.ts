@@ -2,12 +2,10 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   clean: true,
-  dts: true,
-  entry: ["src/index.ts"],
-  format: ["esm"],
+  entry: ["src/bin.ts"],
   sourcemap: true,
   minify: true,
-  target: "esnext",
-  outDir: "dist",
-  onSuccess: "cp -r _templates/. dist/_templates/",
+  target: "es5",
+  outDir: "lib",
+  onSuccess: "cp -r _templates/ lib/_templates",
 });

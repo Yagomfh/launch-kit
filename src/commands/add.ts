@@ -1,14 +1,13 @@
 import { Command } from "commander";
-import { getConfig } from "@/src/utils/get-config";
+import { addDocker } from "../actions/add/docker";
 
-// @ts-ignore
-const __dirname = new URL(".", import.meta.url).pathname;
+type AddFeatures = "docker" | "auth" | undefined;
 
 export const add = new Command()
   .name("add")
   .description("add a new feature")
   .argument("[feature]", "feature to add")
-  .action((feature?: string, opts) => {
+  .action((feature: AddFeatures) => {
     if (!feature) {
       console.log(
         "Please provide a feature to add: launchkit-cli add <feature>\n- docker\n- auth"
@@ -16,10 +15,14 @@ export const add = new Command()
       return;
     }
 
-    // Get launchkit.json config
-    // const config = getConfig();
-
-    console.log(__dirname);
-    console.log("Feature added: ", feature);
-    console.log("Options: ", opts);
+    switch (feature) {
+      case "docker":
+        addDocker();
+        break;
+      case "auth":
+        // addAuth(__dirname);
+        break;
+      default:
+        console.log("Invalid feature");
+    }
   });

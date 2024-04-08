@@ -1,25 +1,20 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Default",
   "compilerOptions": {
-    "composite": false,
+    "target": "es5",
+    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "moduleResolution": "node",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
-    "skipLibCheck": true,
+    "lib": ["esnext"],
     "strict": true,
-    "isolatedModules": false,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./lib",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "_templates/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["./src"]
 }
