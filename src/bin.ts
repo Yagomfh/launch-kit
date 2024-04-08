@@ -12,7 +12,7 @@ async function main() {
     .description(
       "Generate boilerplate code to quickly launch your first product"
     )
-    .version("1.1.2", "-v, --version", "display the version number");
+    .version("1.1.3", "-v, --version", "display the version number");
 
   program.addCommand(init).addCommand(add);
 
