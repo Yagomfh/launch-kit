@@ -1,8 +1,8 @@
-import inquirer from "inquirer";
 import fs from "fs";
 import { prompt } from "enquirer";
-import { copyBackend } from "./backend";
-// import { copyBackend } from "./backend";
+import { copyBoilerplate } from "../../utils/copy";
+import { Config } from "../../utils/get-config";
+import { populateEnv } from "./frontend";
 
 const initAction = async () => {
   const answers: {
@@ -20,49 +20,58 @@ const initAction = async () => {
       name: "backend",
       initial: 0,
       message: "Choose your backend:",
-      choices: ["strapi", "nest"],
+      choices: ["strapi", "nest - Coming soon 🚧"],
     },
     {
       type: "select",
       name: "frontend",
       initial: 0,
       message: "Choose your frontend:",
-      choices: ["vite-react", "nextjs"],
+      choices: ["vite-react", "nextjs - Coming soon 🚧"],
     },
   ]);
 
   // Create a directory with the app name
   fs.mkdirSync(answers.name);
 
+  const config: Config = {
+    name: answers.name,
+    backend: {
+      type: answers.backend,
+      directory: "api",
+      port: 3000,
+    },
+    frontend: {
+      type: answers.frontend,
+      directory: "web",
+      port: 5173,
+    },
+  };
+
+  if (answers.backend === "nest" || answers.frontend === "nextjs") {
+    console.log(
+      "\n🚧 This feature is coming soon! Please choose another option.\n"
+    );
+    return;
+  }
+
   // Create a launchkit.json configuration file
   fs.writeFileSync(
     `${answers.name}/launchkit.json`,
-    JSON.stringify(
-      {
-        name: answers.name,
-        backend: {
-          type: answers.backend,
-          directory: "api",
-        },
-        frontend: {
-          type: answers.frontend,
-          directory: "web",
-        },
-      },
-      null,
-      2
-    )
+    JSON.stringify(config, null, 2)
   );
 
   // Create apps directory
   fs.mkdirSync(`${answers.name}/apps`);
 
-  // Create a backend directory
+  // Create a backend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/api`);
-  copyBackend(answers.name, answers.backend);
+  copyBoilerplate(answers.name, "backend", "api", answers.backend);
 
-  // Create a frontend directory
+  // Create a frontend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/web`);
+  copyBoilerplate(answers.name, "frontend", "web", answers.frontend);
+  populateEnv(config);
 
   // Create a README.md file
   fs.writeFileSync(

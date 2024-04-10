@@ -5,9 +5,7 @@ const addDocker = async () => {
   const config = getConfig();
   execHygen([
     "core",
-    "add",
-    "docker",
-    "strapi",
+    "add-docker-strapi",
     "--service",
     config.backend.directory,
   ]);

@@ -5,10 +5,12 @@ export type Config = {
   backend: {
     type: string;
     directory: string;
+    port: number;
   };
   frontend: {
     type: string;
     directory: string;
+    port: number;
   };
 };
 

@@ -5,7 +5,25 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/*{ strapi }*/) {},
+  register({ strapi }) {
+    let idx = 0;
+
+    // Change the path of the login and register route
+    strapi.plugins["users-permissions"].routes["content-api"].routes.map(
+      ({ handler }) => {
+        if (handler == "auth.callback")
+          strapi.plugins["users-permissions"].routes["content-api"].routes[
+            idx
+          ].path = "/auth/login";
+        if (handler == "auth.register")
+          strapi.plugins["users-permissions"].routes["content-api"].routes[
+            idx
+          ].path = "/auth/register";
+        idx++;
+        return;
+      }
+    );
+  },
 
   /**
    * An asynchronous bootstrap function that runs before
