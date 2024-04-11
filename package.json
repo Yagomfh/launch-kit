@@ -1,6 +1,6 @@
 {
   "name": "launchkit-cli",
-  "version": "1.1.7",
+  "version": "1.1.6",
   "description": "CLI to generate boilerplate code to quickly launch your first product",
   "repository": "https://github.com/Yagomfh/launch-kit",
   "homepage": "https://github.com/Yagomfh/launch-kit#readme",
@@ -10,6 +10,7 @@
   "bin": {
     "launchkit-cli": "./lib/bin.js"
   },
+  "type": "module",
   "keywords": [
     "cli",
     "npmtool",
