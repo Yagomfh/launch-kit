@@ -1,7 +1,7 @@
-import { exec } from "child_process";
+import { exec, execSync } from "child_process";
 import fs from "fs";
 
-const chageVersion = (newVersion) => {
+const changeVersion = async (newVersion) => {
   const filePath = "./src/bin.ts";
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
@@ -16,27 +16,29 @@ const chageVersion = (newVersion) => {
     );
 
     // Write the modified content back to the file
-    fs.writeFile(filePath, updatedContent, "utf8", (err) => {
+    fs.writeFileSync(filePath, updatedContent, "utf8", (err) => {
       if (err) {
         console.error(`Error writing to file: ${err}`);
         return;
       }
       console.log(`Version number updated to ${newVersion}`);
     });
+
+    execSync("git add .");
+    execSync(`git commit -m "feat: bump version to ${newVersion}"`);
+    execSync("git push origin main");
   });
 };
 
-const main = () => {
-  const command = "npm version patch";
-
-  exec(command, (error, stdout, stderr) => {
+const main = async () => {
+  exec("npm version patch", (error, stdout, stderr) => {
     if (error) {
       console.error(`${error}`);
       return;
     }
 
     const version = stdout.replace("\n", "");
-    chageVersion(version);
+    changeVersion(version);
   });
 };
 
