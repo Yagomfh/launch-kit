@@ -5,22 +5,21 @@ import { PrivateRoute } from '../PrivateRoute'
 import { PublicRoute } from '../PublicRoute'
 
 function Router() {
-  const { LOGIN_PATH, REGISTER_PATH, ROOT_PATH, USERS_PATH, USER_PATH } =
-    useRoutePaths()
+  const paths = useRoutePaths()
 
   return (
     <Routes>
       <Route
-        path={ROOT_PATH}
+        path={paths.ROOT_PATH}
         element={
-          <PrivateRoute redirectTo={LOGIN_PATH}>
+          <PrivateRoute redirectTo={paths.LOGIN_PATH}>
             <Home />
           </PrivateRoute>
         }
       />
 
       <Route
-        path={LOGIN_PATH}
+        path={paths.LOGIN_PATH}
         element={
           <PublicRoute>
             <Login />
@@ -29,7 +28,7 @@ function Router() {
       />
 
       <Route
-        path={REGISTER_PATH}
+        path={paths.REGISTER_PATH}
         element={
           <PublicRoute>
             <Register />
@@ -38,7 +37,7 @@ function Router() {
       />
 
       <Route
-        path={USERS_PATH}
+        path={paths.USERS_PATH}
         element={
           <PrivateRoute permissions={['users.list', 'users.create']}>
             <Users />
@@ -47,7 +46,7 @@ function Router() {
       />
 
       <Route
-        path={USER_PATH}
+        path={paths.USER_PATH}
         element={
           <PrivateRoute permissions={['users.list', 'users.create']}>
             <Users />
