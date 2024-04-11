@@ -57,6 +57,7 @@ npx launchkit-cli@latest add [feature]
 ### Features
 
 - `docker`: adds a Dockerfile and .dockerignore to your project
+- `page`: adds a new page to your frontend project
 
 ### Example
 

@@ -7,5 +7,5 @@ export default defineConfig({
   minify: true,
   target: "es5",
   outDir: "lib",
-  onSuccess: "cp -r _templates/ lib/_templates",
+  onSuccess: "cp -rf _templates/ lib/_templates",
 });
