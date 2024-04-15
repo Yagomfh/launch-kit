@@ -26,7 +26,6 @@ const changeVersion = async (newVersion) => {
 
     execSync("git add .");
     execSync(`git commit -m "feat: add version ${newVersion}"`);
-    execSync("git push origin main");
   });
 };
 
