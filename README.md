@@ -1,3 +1,9 @@
+<img alt="Logo" src="https://lh3.googleusercontent.com/d/1z5CDK62SpglkxTHJTpOLTWH3JQTp9Nc2">
+<p align="center">
+<img alt="NPM Version" src="https://img.shields.io/npm/v/launchkit-cli">
+<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Yagomfh/launch-kit/publish-package.yml">
+</p>
+
 # launchkit-cli
 
 CLI to generate boilerplate code to quickly launch your first product

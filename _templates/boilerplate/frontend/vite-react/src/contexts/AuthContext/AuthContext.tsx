@@ -26,6 +26,7 @@ export type Register = {
 
 export type AuthContextData = {
   user?: User
+  setUser: (user: User) => void
   isAuthenticated: boolean
   loadingUserData: boolean
   register: (params: Register) => Promise<void | AxiosError>

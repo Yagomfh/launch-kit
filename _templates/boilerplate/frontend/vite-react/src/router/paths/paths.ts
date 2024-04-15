@@ -3,13 +3,15 @@ const LOGIN_PATH = '/login'
 const REGISTER_PATH = '/register'
 const USERS_PATH = '/users'
 const USER_PATH = '/users/:id'
+const SETTINGS_PATH = '/settings'
 
 const paths = {
   ROOT_PATH,
   LOGIN_PATH,
   REGISTER_PATH,
   USERS_PATH,
-  USER_PATH
+  USER_PATH,
+  SETTINGS_PATH
 } as const
 
 export default paths

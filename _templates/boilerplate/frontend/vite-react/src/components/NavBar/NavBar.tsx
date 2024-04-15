@@ -20,7 +20,7 @@ import { Logo } from '../Logo'
 function NavBar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isAuthenticated, signOut, user, loadingUserData } = useSession()
-  const { ROOT_PATH, USERS_PATH } = useRoutePaths()
+  const { ROOT_PATH, USERS_PATH, SETTINGS_PATH } = useRoutePaths()
 
   if (!isAuthenticated) return null
 
@@ -58,8 +58,11 @@ function NavBar() {
               <MenuItem>
                 <Link to={USERS_PATH}>Users</Link>
               </MenuItem>
-              <MenuDivider />
             </CanAccess>
+            <MenuItem>
+              <Link to={SETTINGS_PATH}>Settings</Link>
+            </MenuItem>
+            <MenuDivider />
             <MenuItem onClick={signOut}>Logout</MenuItem>
           </MenuList>
         </Menu>
