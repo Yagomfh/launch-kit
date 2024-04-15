@@ -58,7 +58,7 @@ function Login() {
               type="email"
               variant="filled"
               placeholder="email@example.com"
-              focusBorderColor="orange.200"
+              focusBorderColor="brand.200"
               onChange={formik.handleChange}
               value={formik.values.email}
               size="md"
@@ -77,12 +77,12 @@ function Login() {
               name="rememberMe"
               onChange={formik.handleChange}
               isChecked={formik.values.rememberMe}
-              colorScheme="orange"
+              colorScheme="brand"
             >
               Remember me?
             </Checkbox>
 
-            <Link colorScheme="orange" href="#">
+            <Link colorScheme="brand" href="#">
               Forgot password?
             </Link>
           </HStack>
@@ -90,7 +90,7 @@ function Login() {
             type="submit"
             width="full"
             mt={4}
-            colorScheme="orange"
+            colorScheme="brand"
             isLoading={loading}
           >
             Login

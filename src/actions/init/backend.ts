@@ -2,8 +2,8 @@ import { execHygen } from "../../utils/exec-hygen";
 import { generateRandomBase64String } from "../../utils/generate-keys";
 import { Config } from "../../utils/get-config";
 
-export const populateBackendEnv = (config: Config) => {
-  execHygen([
+export const populateBackendEnv = async (config: Config) => {
+  await execHygen([
     "core",
     `add-${config.backend.type}-env`,
     "--app",

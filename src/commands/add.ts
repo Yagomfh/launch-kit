@@ -1,6 +1,5 @@
 import { Command } from "commander";
-import { addDocker } from "../actions/add/docker";
-import { addPage } from "../actions/add/page";
+import { addActions } from "../actions";
 
 type AddFeatures = "docker" | "page" | undefined;
 
@@ -16,14 +15,7 @@ export const add = new Command()
       return;
     }
 
-    switch (feature) {
-      case "docker":
-        addDocker();
-        break;
-      case "page":
-        addPage();
-        break;
-      default:
-        console.log("Invalid feature");
-    }
+    if (!addActions[feature]) return console.log("Invalid feature");
+
+    addActions[feature]();
   });

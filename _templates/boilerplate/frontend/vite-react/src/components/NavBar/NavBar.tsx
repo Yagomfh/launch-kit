@@ -12,25 +12,36 @@ import {
   MenuItem,
   MenuList,
   SkeletonCircle,
-  useColorMode
+  useColorMode,
+  useColorModeValue
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { Logo } from '../Logo'
 
 function NavBar() {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { toggleColorMode } = useColorMode()
+  const color = useColorModeValue('brand.50', 'brand.900')
+  const avatarColor = useColorModeValue('brand.900', 'brand.50')
+  const icon = useColorModeValue(<MoonIcon />, <SunIcon />)
   const { isAuthenticated, signOut, user, loadingUserData } = useSession()
   const { ROOT_PATH, USERS_PATH, SETTINGS_PATH } = useRoutePaths()
 
   if (!isAuthenticated) return null
 
   return (
-    <HStack p={4} boxShadow="sm" justifyContent={'space-between'}>
+    <HStack
+      p={4}
+      boxShadow="sm"
+      justifyContent={'space-between'}
+      bgColor={color}
+    >
       <HStack gap={8}>
-        <HStack gap={4}>
-          <Logo />
-          <Heading size="md">LaunchKit CLI</Heading>
-        </HStack>
+        <Link to={ROOT_PATH}>
+          <HStack gap={4}>
+            <Logo />
+            <Heading size="md">LaunchKit CLI</Heading>
+          </HStack>
+        </Link>
         <HStack gap={4}>
           <Link to={ROOT_PATH}>Home</Link>
           <CanAccess permissions={['users.list']}>
@@ -42,7 +53,7 @@ function NavBar() {
         <IconButton
           size={'sm'}
           aria-label="Search database"
-          icon={colorMode == 'light' ? <MoonIcon /> : <SunIcon />}
+          icon={icon}
           onClick={toggleColorMode}
         />
         <Menu>
@@ -50,7 +61,12 @@ function NavBar() {
             {loadingUserData ? (
               <SkeletonCircle size="8" />
             ) : (
-              <Avatar size="sm" name={`${user?.firstName} ${user?.lastName}`} />
+              <Avatar
+                size="sm"
+                name={`${user?.firstName} ${user?.lastName}`}
+                bgColor={avatarColor}
+                color={color}
+              />
             )}
           </MenuButton>
           <MenuList>

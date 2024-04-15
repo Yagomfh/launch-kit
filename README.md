@@ -4,8 +4,6 @@
 <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Yagomfh/launch-kit/publish-package.yml">
 </p>
 
-# launchkit-cli
-
 CLI to generate boilerplate code to quickly launch your first product
 
 ## Quick Start
