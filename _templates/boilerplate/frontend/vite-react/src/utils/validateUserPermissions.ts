@@ -1,7 +1,4 @@
-type User = {
-  permissions: string[]
-  roles: string[]
-}
+import { User } from '@/contexts'
 
 type Params = {
   user?: User

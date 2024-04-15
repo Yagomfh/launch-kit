@@ -62,12 +62,22 @@ npx launchkit-cli@latest add [feature]
 
 - `docker`: adds a Dockerfile and .dockerignore to your project
 - `page`: adds a new page to your frontend project
+- `email`: adds email provider to your backend so you can send emails
+- `email-confirmation`: forces users to confirm their email address before they can login
 
 ### Example
 
 ```bash
 npx launchkit-cli@latest add docker
 ```
+
+## Troubleshooting
+
+### Email confirmation not working
+
+SendGrid requires you to verify your email address before you can send emails.
+
+If the `from` adn `replyTo` emails you setup are not verified the provider wo'nt be able to send emails.
 
 ## License
 

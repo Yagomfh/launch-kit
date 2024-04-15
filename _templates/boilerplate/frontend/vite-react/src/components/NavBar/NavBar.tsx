@@ -1,6 +1,5 @@
 import { useRoutePaths, useSession } from '@/hooks'
 import { Link } from 'react-router-dom'
-import { CanAccess } from '../CanAccess'
 import {
   Avatar,
   HStack,
@@ -24,7 +23,7 @@ function NavBar() {
   const avatarColor = useColorModeValue('brand.900', 'brand.50')
   const icon = useColorModeValue(<MoonIcon />, <SunIcon />)
   const { isAuthenticated, signOut, user, loadingUserData } = useSession()
-  const { ROOT_PATH, USERS_PATH, SETTINGS_PATH } = useRoutePaths()
+  const { ROOT_PATH, SETTINGS_PATH } = useRoutePaths()
 
   if (!isAuthenticated) return null
 
@@ -42,12 +41,6 @@ function NavBar() {
             <Heading size="md">LaunchKit CLI</Heading>
           </HStack>
         </Link>
-        <HStack gap={4}>
-          <Link to={ROOT_PATH}>Home</Link>
-          <CanAccess permissions={['users.list']}>
-            <Link to={USERS_PATH}>Users</Link>
-          </CanAccess>
-        </HStack>
       </HStack>
       <HStack gap={4}>
         <IconButton
@@ -70,11 +63,6 @@ function NavBar() {
             )}
           </MenuButton>
           <MenuList>
-            <CanAccess permissions={['users.list']}>
-              <MenuItem>
-                <Link to={USERS_PATH}>Users</Link>
-              </MenuItem>
-            </CanAccess>
             <MenuItem>
               <Link to={SETTINGS_PATH}>Settings</Link>
             </MenuItem>
