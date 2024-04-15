@@ -85,8 +85,6 @@ function AuthProvider(props: Props) {
       try {
         const response = await api.get('/users/me')
 
-        console.log(response)
-
         if (response?.data) {
           const { email, id, firstName, lastName } = response.data
           setUser({
@@ -117,6 +115,7 @@ function AuthProvider(props: Props) {
         isAuthenticated,
         user,
         loadingUserData,
+        setUser,
         signIn,
         signOut,
         register

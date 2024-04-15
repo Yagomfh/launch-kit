@@ -2,7 +2,8 @@ import fs from "fs";
 import { prompt } from "enquirer";
 import { copyBoilerplate } from "../../utils/copy";
 import { Config } from "../../utils/get-config";
-import { populateEnv } from "./frontend";
+import { populateFrontendEnv } from "./frontend";
+import { populateBackendEnv } from "./backend";
 
 const initAction = async () => {
   const answers: {
@@ -67,11 +68,12 @@ const initAction = async () => {
   // Create a backend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/api`);
   copyBoilerplate(answers.name, "backend", "api", answers.backend);
+  populateBackendEnv(config);
 
   // Create a frontend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/web`);
   copyBoilerplate(answers.name, "frontend", "web", answers.frontend);
-  populateEnv(config);
+  populateFrontendEnv(config);
 
   // Create a README.md file
   fs.writeFileSync(

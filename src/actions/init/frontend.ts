@@ -1,7 +1,7 @@
 import { execHygen } from "../../utils/exec-hygen";
 import { Config } from "../../utils/get-config";
 
-export const populateEnv = (config: Config) => {
+export const populateFrontendEnv = (config: Config) => {
   let root = "";
 
   if (config.backend.type === "strapi") {
