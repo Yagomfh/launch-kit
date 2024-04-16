@@ -6,7 +6,7 @@ process.on("SIGINT", () => process.exit(0));
 process.on("SIGTERM", () => process.exit(0));
 
 async function main() {
-  const version = "v1.2.0";
+  const version = "v1.2.1";
 
   const program = new Command()
     .name("launchkit-cli")
