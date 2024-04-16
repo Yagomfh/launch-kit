@@ -61,14 +61,14 @@ const ChangeEmailForm = () => {
             type="email"
             variant="filled"
             placeholder="email@example.com"
-            focusBorderColor="orange.200"
+            focusBorderColor="brand.200"
             onChange={formik.handleChange}
             value={formik.values.email}
             size="md"
           />
           <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
         </FormControl>
-        <Button isLoading={loading} type="submit" mt={4} colorScheme="orange">
+        <Button isLoading={loading} type="submit" mt={4} colorScheme="brand">
           Update email
         </Button>
       </VStack>

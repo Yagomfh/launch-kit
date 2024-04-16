@@ -68,12 +68,12 @@ const initAction = async () => {
   // Create a backend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/api`);
   copyBoilerplate(answers.name, "backend", "api", answers.backend);
-  populateBackendEnv(config);
+  await populateBackendEnv(config);
 
   // Create a frontend directory and copy the boilerplate
   fs.mkdirSync(`${answers.name}/apps/web`);
   copyBoilerplate(answers.name, "frontend", "web", answers.frontend);
-  populateFrontendEnv(config);
+  await populateFrontendEnv(config);
 
   // Create a README.md file
   fs.writeFileSync(

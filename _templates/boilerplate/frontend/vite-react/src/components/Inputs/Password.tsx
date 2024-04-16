@@ -27,7 +27,7 @@ const PasswordInput: FC<Props & ComponentProps<typeof Input>> = (props) => {
         <Input
           size="md"
           variant="filled"
-          focusBorderColor="orange.200"
+          focusBorderColor="brand.200"
           placeholder="password"
           {...props}
           type={show ? 'text' : 'password'}
@@ -38,7 +38,7 @@ const PasswordInput: FC<Props & ComponentProps<typeof Input>> = (props) => {
             aria-label="View password"
             variant="ghost"
             size="sm"
-            colorScheme="orange"
+            colorScheme="brand"
             onClick={handleClick}
             icon={show ? <ViewOffIcon /> : <ViewIcon />}
           />

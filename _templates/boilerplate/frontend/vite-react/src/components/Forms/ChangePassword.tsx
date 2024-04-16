@@ -89,7 +89,7 @@ const ChangePasswordForm = () => {
             errorMsg={formik.errors.passwordConfirmation}
           />
         </HStack>
-        <Button isLoading={loading} type="submit" mt={4} colorScheme="orange">
+        <Button isLoading={loading} type="submit" mt={4} colorScheme="brand">
           Update password
         </Button>
       </VStack>

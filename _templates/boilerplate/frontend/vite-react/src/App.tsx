@@ -4,13 +4,14 @@ import { NavBar } from './components'
 import { AuthProvider } from './providers'
 import { Router } from './router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { theme } from '@/theme'
 
 const queryClient = new QueryClient()
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <BrowserRouter>
           <AuthProvider>
             <NavBar />
