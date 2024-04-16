@@ -4,10 +4,10 @@ to: "<%= auth === 'public' ? null : `apps/${service}/src/router/Router/Router.ts
 after: <Routes>
 ---
       <Route
-        path={paths.<%=h.changeCase.upper(page)%>}
+        path={paths.<%=h.changeCase.upper(h.changeCase.snake(page))%>}
         element={
           <PrivateRoute redirectTo={paths.LOGIN_PATH}>
-            <<%=h.capitalize(page)%> />
+            <<%=h.capitalize(h.changeCase.camel(page))%> />
           </PrivateRoute>
         }
       />

@@ -1,12 +1,12 @@
 ---
-to: apps/<%=service%>/src/pages/<%=h.capitalize(page)%>/<%=h.capitalize(page)%>.tsx
+to: apps/<%=service%>/src/pages/<%=h.capitalize(h.changeCase.camel(page))%>/<%=h.capitalize(h.changeCase.camel(page))%>.tsx
 ---
-function <%=h.capitalize(page)%>() {
+const <%=h.capitalize(h.changeCase.camel(page))%> = () => {
   return (
     <div>
-      <h1><%=h.capitalize(page)%></h1>
+      <h1><%=h.capitalize(h.changeCase.camel(page))%></h1>
     </div>
   )
 }
 
-export default <%=h.capitalize(page)%>
+export default <%=h.capitalize(h.changeCase.camel(page))%>
