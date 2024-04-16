@@ -47,7 +47,7 @@ const AuthenticationLayout: FC<Props> = ({
       >
         <VStack
           flex={1}
-          bgColor={colorMode == 'light' ? 'black' : 'white'}
+          bgColor={colorMode == 'light' ? 'brand.900' : 'white'}
           h={'100%'}
           p={8}
           alignItems={'flex-start'}
@@ -63,24 +63,33 @@ const AuthenticationLayout: FC<Props> = ({
                 <Logo />
               </LightMode>
             )}
-            <Heading size="md" color={colorMode == 'light' ? 'white' : 'black'}>
+            <Heading
+              size="md"
+              color={colorMode == 'light' ? 'white' : 'brand.900'}
+            >
               LaunchKit CLI
             </Heading>
           </HStack>
           <VStack gap={4}>
-            <Text color={colorMode == 'light' ? 'white' : 'black'} w={'100%'}>
+            <Text
+              color={colorMode == 'light' ? 'white' : 'brand.900'}
+              w={'100%'}
+            >
               A CLI to save you countless hours of work and helped you deliver
               stunning web apps faster than ever before
             </Text>
 
-            <Text color={colorMode == 'light' ? 'white' : 'black'} w={'100%'}>
+            <Text
+              color={colorMode == 'light' ? 'white' : 'brand.900'}
+              w={'100%'}
+            >
               Made with ❤️ by LaunchKit CLI
             </Text>
           </VStack>
         </VStack>
         <VStack
           flex={1}
-          bgColor={colorMode == 'light' ? 'white' : 'black'}
+          bgColor={colorMode == 'light' ? 'white' : 'brand.900'}
           h={'100%'}
           p={8}
         >
@@ -88,7 +97,7 @@ const AuthenticationLayout: FC<Props> = ({
             <IconButton
               size={'sm'}
               aria-label="Search database"
-              colorScheme="orange"
+              colorScheme="brand"
               icon={colorMode == 'light' ? <MoonIcon /> : <SunIcon />}
               onClick={toggleColorMode}
             />

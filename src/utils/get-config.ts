@@ -3,14 +3,17 @@ import fs from "fs";
 export type Config = {
   name: string;
   backend: {
-    type: string;
+    type: "strapi" | "nest";
     directory: string;
     port: number;
   };
   frontend: {
-    type: string;
+    type: "vite-react" | "nextjs";
     directory: string;
     port: number;
+  };
+  email?: {
+    provider: string;
   };
 };
 

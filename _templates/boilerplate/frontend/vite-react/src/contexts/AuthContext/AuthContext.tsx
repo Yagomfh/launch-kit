@@ -5,9 +5,8 @@ export type User = {
   id: string
   firstName: string
   lastName: string
+  confirmed: boolean
   email: string
-  // permissions: string[]
-  // roles: string[]
 }
 
 export type SignInCredentials = {

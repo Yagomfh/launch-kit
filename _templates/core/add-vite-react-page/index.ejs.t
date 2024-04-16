@@ -1,4 +1,4 @@
 ---
-to: apps/<%=service%>/src/pages/<%=h.capitalize(page)%>/index.ts
+to: apps/<%=service%>/src/pages/<%=h.capitalize(h.changeCase.camel(page))%>/index.ts
 ---
-export { default as <%=h.capitalize(page)%> } from './<%=h.capitalize(page)%>'
+export { default as <%=h.capitalize(h.changeCase.camel(page))%> } from './<%=h.capitalize(h.changeCase.camel(page))%>'

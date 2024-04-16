@@ -10,6 +10,18 @@ import {
 import { createSessionCookies, getToken, removeSessionCookies } from '@/utils'
 import { Register } from '@/contexts/AuthContext/AuthContext'
 import { AxiosError } from 'axios'
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  VStack,
+  useDisclosure
+} from '@chakra-ui/react'
 
 type Props = {
   children: ReactNode
@@ -23,6 +35,7 @@ function AuthProvider(props: Props) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const token = getToken()
   const isAuthenticated = Boolean(token)
 
@@ -33,6 +46,10 @@ function AuthProvider(props: Props) {
         username: params.email
       })
       const { jwt, user } = response.data
+
+      if (!user.confirmed) {
+        return onOpen()
+      }
 
       createSessionCookies({ token: jwt })
       setUser(user)
@@ -86,12 +103,13 @@ function AuthProvider(props: Props) {
         const response = await api.get('/users/me')
 
         if (response?.data) {
-          const { email, id, firstName, lastName } = response.data
+          const { email, id, firstName, lastName, confirmed } = response.data
           setUser({
             email,
             id,
             firstName,
-            lastName
+            lastName,
+            confirmed
           })
         }
       } catch (error) {
@@ -122,6 +140,20 @@ function AuthProvider(props: Props) {
       }}
     >
       {children}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Welcome on board!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack gap={4} alignItems={'flex-start'}>
+              <Text>You account was created successfully.</Text>
+              <Text>Please check your email to confirm your account.</Text>
+            </VStack>
+          </ModalBody>
+          <ModalFooter></ModalFooter>
+        </ModalContent>
+      </Modal>
     </AuthContext.Provider>
   )
 }

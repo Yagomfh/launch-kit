@@ -77,7 +77,7 @@ function Register() {
                 type="firstName"
                 variant="filled"
                 placeholder="John"
-                focusBorderColor="orange.200"
+                focusBorderColor="brand.200"
                 onChange={formik.handleChange}
                 value={formik.values.firstName}
                 size="md"
@@ -95,7 +95,7 @@ function Register() {
                 type="lastName"
                 variant="filled"
                 placeholder="Doe"
-                focusBorderColor="orange.200"
+                focusBorderColor="brand.200"
                 onChange={formik.handleChange}
                 value={formik.values.lastName}
                 size="md"
@@ -114,7 +114,7 @@ function Register() {
               type="email"
               variant="filled"
               placeholder="email@example.com"
-              focusBorderColor="orange.200"
+              focusBorderColor="brand.200"
               onChange={formik.handleChange}
               value={formik.values.email}
               size="md"
@@ -149,7 +149,7 @@ function Register() {
             type="submit"
             width="full"
             mt={4}
-            colorScheme="orange"
+            colorScheme="brand"
           >
             Sign Up
           </Button>

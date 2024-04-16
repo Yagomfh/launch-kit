@@ -9,7 +9,7 @@ const Logo = () => {
       icon={
         <IoIosRocket
           fontSize="1.5rem"
-          color={colorMode == 'light' ? 'white' : 'black'}
+          color={colorMode == 'light' ? 'brand.900' : 'brand.50'}
         />
       }
     />

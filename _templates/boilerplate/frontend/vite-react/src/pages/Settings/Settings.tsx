@@ -20,12 +20,7 @@ function Settings() {
         <Text>Manage your account settings and set e-mail preferences.</Text>
       </VStack>
       <Divider />
-      <Tabs
-        variant="soft-rounded"
-        colorScheme="orange"
-        display={'flex'}
-        gap={8}
-      >
+      <Tabs variant="soft-rounded" colorScheme="brand" display={'flex'} gap={8}>
         <TabList flexDir={'column'} flex={1} gap={1}>
           <Tab justifyContent={'flex-start'}>Profile</Tab>
           <Tab justifyContent={'flex-start'}>Account</Tab>

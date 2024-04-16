@@ -1,14 +1,14 @@
 import { execHygen } from "../../utils/exec-hygen";
 import { Config } from "../../utils/get-config";
 
-export const populateFrontendEnv = (config: Config) => {
+export const populateFrontendEnv = async (config: Config) => {
   let root = "";
 
   if (config.backend.type === "strapi") {
     root = "/api";
   }
 
-  execHygen([
+  await execHygen([
     "core",
     `add-${config.frontend.type}-env`,
     "--app",

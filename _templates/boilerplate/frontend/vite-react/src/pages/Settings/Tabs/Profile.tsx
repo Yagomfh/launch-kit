@@ -80,7 +80,7 @@ const Profile = () => {
               type="firstName"
               variant="filled"
               placeholder="John"
-              focusBorderColor="orange.200"
+              focusBorderColor="brand.200"
               onChange={formik.handleChange}
               value={formik.values.firstName}
               size="md"
@@ -98,14 +98,14 @@ const Profile = () => {
               type="lastName"
               variant="filled"
               placeholder="Doe"
-              focusBorderColor="orange.200"
+              focusBorderColor="brand.200"
               onChange={formik.handleChange}
               value={formik.values.lastName}
               size="md"
             />
             <FormErrorMessage>{formik.errors.lastName}</FormErrorMessage>
           </FormControl>
-          <Button isLoading={loading} type="submit" mt={4} colorScheme="orange">
+          <Button isLoading={loading} type="submit" mt={4} colorScheme="brand">
             Update Profile
           </Button>
         </VStack>

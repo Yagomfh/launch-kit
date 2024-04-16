@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { useRoutePaths } from '@/hooks'
-import { Home, Login, Settings, Register, Users } from '@/pages'
+import { Home, Login, Settings, Register } from '@/pages'
 import { PrivateRoute } from '../PrivateRoute'
 import { PublicRoute } from '../PublicRoute'
 
@@ -33,24 +33,6 @@ function Router() {
           <PublicRoute>
             <Register />
           </PublicRoute>
-        }
-      />
-
-      <Route
-        path={paths.USERS_PATH}
-        element={
-          <PrivateRoute permissions={['users.list', 'users.create']}>
-            <Users />
-          </PrivateRoute>
-        }
-      />
-
-      <Route
-        path={paths.USER_PATH}
-        element={
-          <PrivateRoute permissions={['users.list', 'users.create']}>
-            <Users />
-          </PrivateRoute>
         }
       />
 
