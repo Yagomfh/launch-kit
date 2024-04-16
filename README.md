@@ -6,6 +6,20 @@
 
 CLI to generate boilerplate code to quickly launch your first product
 
+## Table of Contents
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [add](#add)
+    - [Features](#features)
+    - [Example](#example)
+- [Donations](#donations)
+- [Troubleshooting](#troubleshooting)
+  - [Email confirmation not working](#email-confirmation-not-working)
+- [License](#license)
+
 ## Quick Start
 
 Create a new project using the `init` command.
@@ -50,7 +64,9 @@ Use the `init` command to initialize a new project.
 npx launchkit-cli@latest init
 ```
 
-## add
+## Commands
+
+### add
 
 Use the `add` command to add features to your project.
 
@@ -58,18 +74,23 @@ Use the `add` command to add features to your project.
 npx launchkit-cli@latest add [feature]
 ```
 
-### Features
+#### Features
 
 - `docker`: adds a Dockerfile and .dockerignore to your project
 - `page`: adds a new page to your frontend project
 - `email`: adds email provider to your backend so you can send emails
-- `email-confirmation`: forces users to confirm their email address before they can login
+- `email-confirmation` (requires `add email`): forces users to confirm their email address before they can login
 
-### Example
+#### Example
 
 ```bash
 npx launchkit-cli@latest add docker
 ```
+
+## Donations
+
+Your donations are highly appreciated. They help me to continue working on this project.
+You can donate via [Github Sponsors](https://github.com/sponsors/Yagomfh)
 
 ## Troubleshooting
 

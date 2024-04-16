@@ -1,5 +1,6 @@
 import { getConfig } from "../../../utils/get-config";
 import { execHygen } from "../../../utils/exec-hygen";
+import { emailConfirmationDocs } from "../../../documentation";
 
 export const addEmailConfirmation = async () => {
   const config = getConfig();
@@ -9,21 +10,20 @@ export const addEmailConfirmation = async () => {
   }
 
   console.log(
-    "Let's force your users to confirm their email before they can login! 🚀\n"
+    "\nLet's force your users to confirm their email before they can login! 🚀\n"
   );
 
   await execHygen([
     "core",
-    `add-${config.frontend.type}-page`,
-    "--app",
-    config.name,
+    `add-email-confirmation-${config.frontend.type}`,
     "--service",
     config.frontend.directory,
-    "--page",
-    "emailConfirmation",
-    "--path",
-    "/email-confirmation",
-    "--auth",
-    "public",
   ]);
+
+  console.log(
+    emailConfirmationDocs[config.backend.type](
+      config.backend.port,
+      config.frontend.port
+    )
+  );
 };
