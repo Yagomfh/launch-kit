@@ -4,7 +4,7 @@ to: "<%= auth === 'public' ? `apps/${service}/src/router/Router/Router.tsx` : nu
 after: <Routes>
 ---
       <Route
-        path={paths.<%=h.changeCase.upper(h.changeCase.snake(page))%>}
+        path={paths.<%=h.changeCase.upper(h.changeCase.snake(page))%>_PATH}
         element={
           <PublicRoute>
             <<%=h.capitalize(h.changeCase.camel(page))%> />
