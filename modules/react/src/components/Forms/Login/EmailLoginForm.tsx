@@ -1,14 +1,8 @@
 import * as React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
-import {
-  FormControl,
-  Input,
-  Button,
-  VStack,
-  FormErrorMessage,
-  FormLabel,
-} from '@chakra-ui/react';
+import Button from '@mui/joy/Button';
+import { FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy';
 import PasswordInput from '../../Inputs/Password';
 
 const LoginSchema = Yup.object().shape({
@@ -21,12 +15,21 @@ const LoginSchema = Yup.object().shape({
 type LoginPayload = {
   email: string;
   password: string;
-  rememberMe: boolean;
 };
 
 type Props = {
   onSubmit: (values: LoginPayload) => Promise<void>;
-  emailLabel: string;
+  inputStyle: {
+    variant?: React.ComponentProps<typeof Input>['variant'];
+    color?: React.ComponentProps<typeof Input>['color'];
+    size?: React.ComponentProps<typeof Input>['size'];
+  };
+  buttonStyle: {
+    variant?: React.ComponentProps<typeof Button>['variant'];
+    color?: React.ComponentProps<typeof Button>['color'];
+    size?: React.ComponentProps<typeof Button>['size'];
+  };
+  emailLabel?: string;
   emailPlaceholder: string;
   passwordLabel: string;
   passwordPlaceholder: string;
@@ -35,6 +38,8 @@ type Props = {
 
 const EmailLoginForm = ({
   onSubmit,
+  inputStyle,
+  buttonStyle,
   emailLabel,
   emailPlaceholder,
   passwordLabel,
@@ -45,9 +50,8 @@ const EmailLoginForm = ({
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
+      email: 'test@email.com',
+      password: 'Test@123456789',
     },
     onSubmit: async (values: LoginPayload) => {
       setLoading(true);
@@ -59,42 +63,43 @@ const EmailLoginForm = ({
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <VStack gap={4}>
-        <FormControl isInvalid={!!formik.errors.email && formik.touched.email}>
-          <FormLabel>{emailLabel}</FormLabel>
+      <Stack
+        direction="column"
+        justifyContent="center"
+        alignItems="stretch"
+        spacing={2}
+      >
+        <FormControl error={!!formik.errors.email && formik.touched.email}>
+          {emailLabel && <FormLabel>{emailLabel}</FormLabel>}
           <Input
             id="email"
             name="email"
             type="email"
-            variant="filled"
+            {...inputStyle}
             placeholder={emailPlaceholder}
-            focusBorderColor="brand.200"
+            defaultValue={formik.values.email}
             onChange={formik.handleChange}
-            value={formik.values.email}
-            size="md"
           />
-          <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
+          <FormHelperText>{formik.errors.email}</FormHelperText>
         </FormControl>
-        <PasswordInput
-          id="password"
-          name="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          placeholder={passwordPlaceholder}
-          formLabel={passwordLabel}
-          errorMsg={formik.errors.password}
-          isValid={!!formik.errors.password && formik.touched.password}
-        />
-        <Button
-          type="submit"
-          width="full"
-          mt={4}
-          colorScheme="brand"
-          isLoading={loading}
+        <FormControl
+          error={!!formik.errors.password && formik.touched.password}
         >
+          {passwordLabel && <FormLabel>{passwordLabel}</FormLabel>}
+          <PasswordInput
+            id="password"
+            name="password"
+            {...inputStyle}
+            placeholder={passwordPlaceholder}
+            defaultValue={formik.values.password}
+            onChange={formik.handleChange}
+          />
+          <FormHelperText>{formik.errors.password}</FormHelperText>
+        </FormControl>
+        <Button type="submit" loading={loading} {...buttonStyle}>
           {buttonText}
         </Button>
-      </VStack>
+      </Stack>
     </form>
   );
 };

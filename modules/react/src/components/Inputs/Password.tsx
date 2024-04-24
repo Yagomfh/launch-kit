@@ -1,53 +1,35 @@
 // @ts-ignore
+import { Input, IconButton } from '@mui/joy';
 import * as React from 'react';
-import { ViewOffIcon, ViewIcon } from '@chakra-ui/icons';
-import {
-  FormControl,
-  InputGroup,
-  Input,
-  InputRightElement,
-  IconButton,
-  FormLabel,
-  FormErrorMessage,
-} from '@chakra-ui/react';
-import { ComponentProps, FC, useState } from 'react';
+import { FC, useState } from 'react';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 
 interface Props {
-  formLabel?: string;
-  errorMsg?: string;
-  isValid?: boolean;
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  variant?: React.ComponentProps<typeof Input>['variant'];
+  color?: React.ComponentProps<typeof Input>['color'];
+  size?: React.ComponentProps<typeof Input>['size'];
+  defaultValue?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 }
 
-const PasswordInput: FC<Props & ComponentProps<typeof Input>> = props => {
+const PasswordInput: FC<Props> = (props) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   return (
-    <FormControl {...(props.isValid && { isInvalid: props.isValid })}>
-      {props.formLabel && <FormLabel>{props.formLabel}</FormLabel>}
-      <InputGroup size="md">
-        <Input
-          size="md"
-          variant="filled"
-          focusBorderColor="brand.200"
-          placeholder="password"
-          {...props}
-          type={show ? 'text' : 'password'}
-        />
-        <InputRightElement>
-          <IconButton
-            isRound={true}
-            aria-label="View password"
-            variant="ghost"
-            size="sm"
-            colorScheme="brand"
-            onClick={handleClick}
-            icon={show ? <ViewOffIcon /> : <ViewIcon />}
-          />
-        </InputRightElement>
-      </InputGroup>
-      {props.errorMsg && <FormErrorMessage>{props.errorMsg}</FormErrorMessage>}
-    </FormControl>
+    <Input
+      {...props}
+      type={show ? 'text' : 'password'}
+      endDecorator={
+        <IconButton variant="soft" onClick={handleClick}>
+          {show ? <VisibilityRoundedIcon /> : <VisibilityOffRoundedIcon />}
+        </IconButton>
+      }
+    />
   );
 };
 

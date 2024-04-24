@@ -12,45 +12,56 @@ import { EmailLoginForm } from "react-launchkit";
 
 ## Usage
 
-import { EmailLoginForm, LaunchKitProvider } from "react-launchkit";
-import { Box } from "@chakra-ui/react";
+import { EmailLoginForm } from "react-launchkit";
+import { Box, Stack } from "@mui/joy";
 
-<LaunchKitProvider>
-  <Box p="6" rounded="md" borderWidth={2}>
-    <EmailLoginForm
-      emailLabel={"Email"}
-      emailPlaceholder="email@example.com"
-      passwordLabel="Password"
-      passwordPlaceholder="Your password"
-      buttonText="Submit"
-      onSubmit={async (values) => {
-        alert(JSON.stringify(values));
-      }}
-    />
-  </Box>
-</LaunchKitProvider>
-<Box h={20} />
+<Stack
+  direction="column"
+  spacing={2}
+>
+<Box
+  sx={{
+    border: "1px solid",
+    p: 2,
+    borderRadius: 10,
+    borderColor: "background.level1",
+    backgroundColor: "white",
+  }}
+>
+  <EmailLoginForm
+    emailLabel="Email"
+    inputStyle={{ variant: "soft" }}
+    buttonStyle={{ variant: "solid", color: "primary" }}
+    emailPlaceholder="email@example.com"
+    passwordLabel="Password"
+    passwordPlaceholder="Your password"
+    buttonText="Submit"
+    onSubmit={async (values) => alert(JSON.stringify(values))}
+  />
+</Box>
 
 ```jsx
 <EmailLoginForm
-  emailLabel={"Email"}
+  emailLabel="Email"
+  inputStyle={{ variant: "soft" }}
+  buttonStyle={{ variant: "solid", color: "primary" }}
   emailPlaceholder="email@example.com"
   passwordLabel="Password"
   passwordPlaceholder="Your password"
   buttonText="Submit"
-  onSubmit={async (values) => {
-    alert(JSON.stringify(values));
-  }}
+  onSubmit={async (values) => alert(JSON.stringify(values))}
 />
 ```
 
+</Stack>
+
 ## Props
 
-| Prop Name           | Type     | Description                                                                                   |
-| ------------------- | -------- | --------------------------------------------------------------------------------------------- |
-| emailLabel          | string   | Label for the email input field                                                               |
-| emailPlaceholder    | string   | Placeholder for the email input field                                                         |
-| passwordLabel       | string   | Label for the password input field                                                            |
-| passwordPlaceholder | string   | Placeholder for the password input field                                                      |
-| buttonText          | string   | Text for the submit button                                                                    |
-| onSubmit            | function | Function to be called when the form is submitted. It receives the form values as an argument. |
+| Prop Name           | Type     | Description                                                                                  |
+| ------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| emailLabel          | string   | Label for the email input field                                                              |
+| emailPlaceholder    | string   | Placeholder for the email input field                                                        |
+| passwordLabel       | string   | Label for the password input field                                                           |
+| passwordPlaceholder | string   | Placeholder for the password input field                                                     |
+| buttonText          | string   | Text for the submit button                                                                   |
+| onSubmit            | function | Callback function that will be called when the form is submitted. It will receive the values |
