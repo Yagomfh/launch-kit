@@ -1,0 +1,84 @@
+{
+  "name": "react-launchkit",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Yago Mfh <yagomfh@gmail.com>",
+  "repository": "https://github.com/Yagomfh/launch-kit",
+  "homepage": "https://github.com/Yagomfh/launch-kit#readme",
+  "main": "dist/index.js",
+  "module": "dist/react-launchkit.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "react",
+    "npmtool",
+    "components",
+    "launchkit",
+    "boilerplate"
+  ],
+  "scripts": {
+    "analyze": "size-limit --why",
+    "build": "dts build",
+    "lint": "dts lint",
+    "prepare": "dts build",
+    "size": "size-limit",
+    "start": "dts watch",
+    "test": "dts test --passWithNoTests"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "dts lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "size-limit": [
+    {
+      "path": "dist/react-launchkit.cjs.production.min.js",
+      "limit": "500 KB"
+    },
+    {
+      "path": "dist/react-launchkit.esm.js",
+      "limit": "500 KB"
+    }
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.1.2",
+    "@tsconfig/recommended": "^1.0.6",
+    "@tsconfig/vite-react": "^3.0.2",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "dts-cli": "^2.0.4",
+    "husky": "^9.0.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "size-limit": "^11.1.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "formik": "^2.4.5",
+    "framer-motion": "^11.1.7",
+    "yup": "^1.4.0"
+  }
+}
