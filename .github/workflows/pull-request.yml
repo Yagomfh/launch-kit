@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   build-docs:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.changed_files, 'docs/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -16,11 +17,12 @@ jobs:
       - name: Install Dependencies
         run: npm install
         working-directory: ./docs
-      - name: Build CLI
+      - name: Build Docs
         run: npm run build
         working-directory: ./docs
 
   build-cli:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.changed_files, 'cli/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -37,6 +39,7 @@ jobs:
         working-directory: ./cli
 
   build-react-module:
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.changed_files, 'modules/react/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
