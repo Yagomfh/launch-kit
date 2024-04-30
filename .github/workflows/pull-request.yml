@@ -4,13 +4,50 @@ on:
     branches:
       - main
 jobs:
-  build:
+  build-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20.x"
-      - run: npm install
-      - run: npm ci
-      - run: npm run build
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./docs
+      - name: Build CLI
+        run: npm run build
+        working-directory: ./docs
+
+  build-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./cli
+      - name: Build CLI
+        run: npm run build
+        working-directory: ./cli
+
+  build-react-module:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./modules/react
+      - name: Build React Module
+        run: npm run build
+        working-directory: ./modules/react
