@@ -1,0 +1,22 @@
+# Config
+
+This is the minimum configuration required to use Launchkit in your application.
+
+## Usage
+
+```jsx
+export const config: LaunchKitConfig = {
+  api,
+  auth: {
+    usersMePath: '/api/users/me',
+    logoutRedirect: '/login',
+  },
+};
+```
+
+## Properties
+
+- `api` - The Axios instance to use for API requests. Must be wrapped by the [`setupInterceptors` function](/docs/guides/react/interceptors).
+- `auth` - The authentication configuration.
+  - `usersMePath` - The path to the endpoint that returns the current user's information.
+  - `logoutRedirect` - The URL to redirect to after logging out.

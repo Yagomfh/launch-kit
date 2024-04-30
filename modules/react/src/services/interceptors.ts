@@ -12,6 +12,7 @@ import {
   getToken,
   removeSessionCookies,
 } from '../utils';
+import toast from 'react-hot-toast';
 
 type FailedRequestQueue = {
   onSuccess: (token: string) => void;
@@ -123,6 +124,10 @@ function onResponseError(
   }
 
   console.log('error', error);
+
+  toast.error(
+    (error.response?.data as any)?.error?.message || 'An error occurred'
+  );
 
   return Promise.reject(error);
 }

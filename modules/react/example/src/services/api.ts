@@ -4,6 +4,6 @@ import { setupInterceptors } from '../../../.';
 
 export const api = setupInterceptors(
   axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:1337',
   })
 );
