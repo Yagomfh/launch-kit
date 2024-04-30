@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import Button from '@mui/joy/Button';
+import { Navigate } from 'react-router-dom';
 import { FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy';
 import PasswordInput from '../../Inputs/Password';
 
@@ -19,44 +20,36 @@ type LoginPayload = {
 
 type Props = {
   onSubmit: (values: LoginPayload) => Promise<void>;
-  inputStyle: {
-    variant?: React.ComponentProps<typeof Input>['variant'];
-    color?: React.ComponentProps<typeof Input>['color'];
-    size?: React.ComponentProps<typeof Input>['size'];
-  };
-  buttonStyle: {
-    variant?: React.ComponentProps<typeof Button>['variant'];
-    color?: React.ComponentProps<typeof Button>['color'];
-    size?: React.ComponentProps<typeof Button>['size'];
-  };
+  inputProps?: React.ComponentProps<typeof Input>;
+  buttonProps?: React.ComponentProps<typeof Button>;
   emailLabel?: string;
-  emailPlaceholder: string;
-  passwordLabel: string;
-  passwordPlaceholder: string;
+  passwordLabel?: string;
   buttonText: string;
+  redirectTo: string;
 };
 
 const EmailLoginForm = ({
   onSubmit,
-  inputStyle,
-  buttonStyle,
+  inputProps,
+  buttonProps,
   emailLabel,
-  emailPlaceholder,
   passwordLabel,
-  passwordPlaceholder,
   buttonText,
+  redirectTo,
 }: Props) => {
   const [loading, setLoading] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
-      email: 'test@email.com',
-      password: 'Test@123456789',
+      email: '',
+      password: '',
     },
     onSubmit: async (values: LoginPayload) => {
       setLoading(true);
-      await onSubmit(values);
-      setLoading(false);
+      await onSubmit(values).finally(() => {
+        setLoading(false);
+        return <Navigate to={redirectTo} />;
+      });
     },
     validationSchema: LoginSchema,
   });
@@ -72,11 +65,10 @@ const EmailLoginForm = ({
         <FormControl error={!!formik.errors.email && formik.touched.email}>
           {emailLabel && <FormLabel>{emailLabel}</FormLabel>}
           <Input
+            {...inputProps}
             id="email"
             name="email"
             type="email"
-            {...inputStyle}
-            placeholder={emailPlaceholder}
             defaultValue={formik.values.email}
             onChange={formik.handleChange}
           />
@@ -87,16 +79,15 @@ const EmailLoginForm = ({
         >
           {passwordLabel && <FormLabel>{passwordLabel}</FormLabel>}
           <PasswordInput
+            {...inputProps}
             id="password"
             name="password"
-            {...inputStyle}
-            placeholder={passwordPlaceholder}
             defaultValue={formik.values.password}
             onChange={formik.handleChange}
           />
           <FormHelperText>{formik.errors.password}</FormHelperText>
         </FormControl>
-        <Button type="submit" loading={loading} {...buttonStyle}>
+        <Button {...buttonProps} type="submit" loading={loading}>
           {buttonText}
         </Button>
       </Stack>

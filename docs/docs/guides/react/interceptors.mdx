@@ -1,0 +1,25 @@
+# API Interceptor
+
+This interceptor is used to handle authentication and authorization in your application. It is a wrapper around the axios instance.
+
+## Usage
+
+```jsx
+import axios from "axios";
+import { setupInterceptors } from "react-launchkit";
+
+export const api = setupInterceptors(
+  axios.create({
+    baseURL: import.meta.env.BASE_URL,
+  })
+);
+```
+
+## Features
+
+- Automatically adds the `Authorization` header to all requests.
+- Automatically removes the `Authorization` header from requests when API requests return a 401 status code.
+
+## Supported clients
+
+- Axios

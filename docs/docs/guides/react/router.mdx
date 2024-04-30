@@ -1,0 +1,45 @@
+# Router
+
+The `Router` component is used to define the routes in your application. It is a wrapper around the `react-router-dom` `BrowserRouter` component and uses the `Route` component to define the routes.
+
+## Usage
+
+```jsx
+import { Router } from "react-launchkit";
+
+function App() {
+  return (
+    <Router
+      routes={[
+        {
+          path: "/",
+          component: <div>Home</div>,
+          access: "public",
+        },
+        {
+          path: "/login",
+          component: <div>Login</div>,
+          access: "public",
+        },
+        {
+          path: "/dashboard",
+          component: <div>Dashboard</div>,
+          access: "private",
+        }
+      ]}
+    />
+  );
+}
+```
+
+
+:::warning
+The `Router` component must be wrapped in the `LaunchKitProvider` component. See the [Quick Start](/docs/guides/react/quick-start#set-up-the-launchkitprovider-and-router) guide for more information.
+:::
+
+## Properties
+
+- `routes` - An array of route objects. Each route object has the following properties:
+  - `path` - The path of the route.
+  - `component` - The component to render when the route is matched.
+  - `access` - The access level required to access the route. Can be either "public" or "private".
