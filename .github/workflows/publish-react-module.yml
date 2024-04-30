@@ -1,0 +1,30 @@
+name: Publish React Module
+on:
+  push:
+    branches: [main]
+    paths:
+      - "modules/react/**"
+jobs:
+  publish-cli:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./modules/react
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install Dependencies
+        run: npm install
+      - name: NPM ci
+        run: npm ci
+      - name: Build CLI
+        run: npm run build
+      - name: Publish CLI
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
