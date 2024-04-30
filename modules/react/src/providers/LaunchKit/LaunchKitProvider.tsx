@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { useApi } from '../../hooks';
 import { AuthProvider } from '../AuthProvider';
-import { AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 import { User } from '../../contexts';
 import { Register, Login } from '../../contexts';
 
 export type LaunchKitConfig = {
   api: {
-    baseURL: string;
+    instance: AxiosInstance;
   };
   auth: {
     registerFn: (params: Register) => Promise<
@@ -17,7 +16,7 @@ export type LaunchKitConfig = {
           jwt: string;
           user: User;
         },
-        any
+        Register
       >
     >;
     loginFn: (params: Login) => Promise<
@@ -26,7 +25,7 @@ export type LaunchKitConfig = {
           jwt: string;
           user: User;
         },
-        any
+        Login
       >
     >;
     getMeFn: () => Promise<AxiosResponse<User, any>>;
@@ -40,10 +39,9 @@ type Props = {
 };
 
 const LaunchKitProvider = ({ children, config }: Props) => {
-  const { api } = useApi({ baseURL: config.api.baseURL });
   return (
     <BrowserRouter>
-      <AuthProvider api={api} {...config.auth}>
+      <AuthProvider api={config.api.instance} {...config.auth}>
         {children}
       </AuthProvider>
     </BrowserRouter>

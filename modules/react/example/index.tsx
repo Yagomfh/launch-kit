@@ -1,11 +1,20 @@
 import 'react-app-polyfill/ie11';
 import * as ReactDOM from 'react-dom';
-// @ts-ignore
-import { LaunchKitProvider, LaunchKitConfig, Router } from '../.';
+import axios from 'axios';
+import {
+  LaunchKitConfig,
+  LaunchKitProvider,
+  Router,
+  setupInterceptors,
+} from '../.';
 
 const config: LaunchKitConfig = {
   api: {
-    baseURL: 'https://api.example.com',
+    instance: setupInterceptors(
+      axios.create({
+        baseURL: 'http://localhost:3000',
+      })
+    ),
   },
   auth: {
     registerFn: async (params) => {
@@ -43,6 +52,11 @@ const App = () => {
           {
             path: '/test',
             component: <div>Test</div>,
+            access: 'private',
+          },
+          {
+            path: '/login',
+            component: <div>Login</div>,
             access: 'public',
           },
         ]}
