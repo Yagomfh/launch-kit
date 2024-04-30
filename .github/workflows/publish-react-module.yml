@@ -5,7 +5,7 @@ on:
     paths:
       - "modules/react/**"
 jobs:
-  publish-cli:
+  publish-react-module:
     runs-on: ubuntu-latest
     defaults:
       run:
