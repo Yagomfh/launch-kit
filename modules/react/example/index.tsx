@@ -6,35 +6,19 @@ import {
   LaunchKitProvider,
   Router,
   setupInterceptors,
+  useSession,
 } from '../.';
+import Login from './src/pages/Login';
 
 const config: LaunchKitConfig = {
-  api: {
-    instance: setupInterceptors(
-      axios.create({
-        baseURL: 'http://localhost:3000',
-      })
-    ),
-  },
+  api: setupInterceptors(
+    axios.create({
+      baseURL: 'http://localhost:1337',
+    })
+  ),
+
   auth: {
-    registerFn: async (params) => {
-      const response = await fetch(`${config.api.baseURL}/register`, {
-        method: 'POST',
-        body: JSON.stringify(params),
-      });
-      return response.json();
-    },
-    loginFn: async (params) => {
-      const response = await fetch(`${config.api.baseURL}/login`, {
-        method: 'POST',
-        body: JSON.stringify(params),
-      });
-      return response.json();
-    },
-    getMeFn: async () => {
-      const response = await fetch(`${config.api.baseURL}/me`);
-      return response.json();
-    },
+    usersMePath: '/api/users/me',
     logoutRedirect: '/login',
   },
 };
@@ -56,7 +40,7 @@ const App = () => {
           },
           {
             path: '/login',
-            component: <div>Login</div>,
+            component: <Login />,
             access: 'public',
           },
         ]}

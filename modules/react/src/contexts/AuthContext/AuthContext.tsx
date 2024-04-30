@@ -1,39 +1,38 @@
 import { AxiosError } from 'axios';
 import { createContext } from 'react';
 
-export type User = {
+export interface User {
   id: string;
   firstName: string;
   lastName: string;
   confirmed: boolean;
   email: string;
-};
+}
 
-export type Login = {
+export interface Login {
   identifier: string;
   password: string;
   rememberMe?: boolean;
-};
+}
 
-export type Register = {
+export interface Register {
   firstName: string;
   lastName: string;
   email: string;
   username: string;
   password: string;
   confirmPassword: string;
-};
+}
 
-export type AuthContextData = {
-  user?: User;
-  setUser: (user: User) => void;
+export interface AuthContextData<T> {
+  user?: T;
+  updateUser: (user: T) => void;
   isAuthenticated: boolean;
   loadingUserData: boolean;
-  register: (params: Register) => Promise<void | AxiosError>;
-  signIn: (credentials: Login) => Promise<void | AxiosError>;
-  signOut: () => void;
-};
+  createSession: (jwt: string, user: T) => Promise<void | AxiosError>;
+  closeSession: () => void;
+}
 
-const AuthContext = createContext({} as AuthContextData);
+const AuthContext = createContext({});
 
 export default AuthContext;

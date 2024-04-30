@@ -1,0 +1,124 @@
+---
+sidebar_position: 1
+---
+
+# Quick Start
+
+In this section you will see how to install and set up React Launchkit in your application. If you used the CLI to create your project, you should already have React Launchkit installed and set up.
+
+:::note
+This quickstart assumes you have a React application set up with Vite and that your backend is built with Strapi.
+:::
+
+## Installation
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs>
+  <TabItem value="npm" label="npm" default>
+    ```bash
+    npm install react-launchkit
+    ```
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```bash
+    yarn add react-launchkit
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+### Set up your API axios instance
+
+We create an axios instance wrapped with the Launchkit interceptor. This allows us to handle authentication and authorization in our application.
+
+You can use this instance all over your application to make API requests.
+
+First let's install axios:
+
+<Tabs>
+  <TabItem value="npm" label="npm" default>
+    ```bash
+    npm install axios
+    ```
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```bash
+    yarn add axios
+    ```
+  </TabItem>
+</Tabs>
+
+Then create the following file:
+
+```jsx title="src/services/api.ts"
+import axios from "axios";
+import { setupInterceptors } from "react-launchkit";
+
+export const api = setupInterceptors(
+  axios.create({
+    baseURL: import.meta.env.BASE_URL,
+  })
+);
+```
+
+[Interceptors reference](/docs/guides/react/interceptors)
+
+### Set up your config 
+
+Create a config file to store your API URL and other configurations.
+
+```jsx title="src/config/launchkit.ts"
+import { LaunchKitConfig, Login, Register } from "react-launchkit";
+import { api } from "../services/api";
+
+export const config: LaunchKitConfig = {
+  api,
+  auth: {
+    usersMePath: '/api/users/me',
+    logoutRedirect: '/login',
+  },
+};
+```
+[Configuration reference](/docs/guides/react/config)
+
+### Set up the LaunchKitProvider and Router
+
+Now that your API instance and config are set up, you can use the `LaunchKitProvider` and `Router` components to set up your application.
+
+```jsx title="src/App.tsx"
+// 1. Import the provider and router
+import { LaunchKitProvider, Router } from "react-launchkit";
+// 2. Import your config
+import { config } from "./config/launchkit";
+
+function App() {
+  return (
+    // 3. Wrap your application with the provider and pass the config
+    <LaunchKitProvider config={config}>
+      // 4. Add the Router component with the routes
+      <Router
+        routes={[
+          {
+            path: "/",
+            component: <div>Home</div>,
+            access: "public",
+          },
+          {
+            path: "/login",
+            component: <div>Login</div>,
+            access: "public",
+          },
+        ]}
+      />
+    </LaunchKitProvider>
+  );
+}
+
+export default App;
+```
+[Router reference](/docs/guides/react/router)
+
+That's it! You have successfully set up React Launchkit in your application.

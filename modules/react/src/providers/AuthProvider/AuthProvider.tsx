@@ -2,8 +2,7 @@ import * as React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AxiosError, AxiosInstance } from 'axios';
-import { AuthContext } from '../../contexts';
-import { Register, Login, User } from '../../contexts/AuthContext/AuthContext';
+import { AuthContext, AuthContextData } from '../../contexts';
 import {
   createSessionCookies,
   getToken,
@@ -20,21 +19,22 @@ type Props = {
   api: AxiosInstance;
 } & LaunchKitConfig['auth'];
 
-function AuthProvider(props: Props) {
+function AuthProvider<T>(props: Props) {
   const { children } = props;
 
-  const [user, setUser] = React.useState<User>();
+  const [user, setUser] = React.useState<T>();
   const [loadingUserData, setLoadingUserData] = React.useState(true);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const token = getToken();
   const isAuthenticated = Boolean(token);
 
-  async function register(params: Register) {
-    try {
-      const response = await props.registerFn(params);
-      const { jwt, user } = response.data;
+  async function updateUser(user: T) {
+    setUser(user);
+  }
 
+  async function createSession(jwt: string, user: T) {
+    try {
       createSessionCookies({ token: jwt });
       setUser(user);
       setAuthorizationHeader({ request: props.api.defaults, token: jwt });
@@ -44,21 +44,7 @@ function AuthProvider(props: Props) {
     }
   }
 
-  async function signIn(params: Login) {
-    try {
-      const response = await props.loginFn(params);
-      const { jwt, user } = response.data;
-
-      createSessionCookies({ token: jwt });
-      setUser(user);
-      setAuthorizationHeader({ request: props.api.defaults, token: jwt });
-    } catch (error) {
-      const err = error as AxiosError;
-      return err;
-    }
-  }
-
-  function signOut() {
+  function closeSession() {
     removeSessionCookies();
     setUser(undefined);
     setLoadingUserData(false);
@@ -81,17 +67,12 @@ function AuthProvider(props: Props) {
       setLoadingUserData(true);
 
       try {
-        const response = await props.getMeFn();
+        const response = await props.api.get<T>(props.usersMePath);
 
         if (response?.data) {
-          const { email, id, firstName, lastName, confirmed } = response.data;
           setUser({
-            email,
-            id,
-            firstName,
-            lastName,
-            confirmed,
-          });
+            ...response.data,
+          } as T);
         }
       } catch (error) {
         /**
@@ -110,15 +91,16 @@ function AuthProvider(props: Props) {
 
   return (
     <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        user,
-        loadingUserData,
-        setUser,
-        signIn,
-        signOut,
-        register,
-      }}
+      value={
+        {
+          isAuthenticated,
+          user,
+          loadingUserData,
+          updateUser,
+          createSession,
+          closeSession,
+        } as AuthContextData<T>
+      }
     >
       {children}
     </AuthContext.Provider>

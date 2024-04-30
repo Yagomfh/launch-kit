@@ -1,34 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../AuthProvider';
-import { AxiosInstance, AxiosResponse } from 'axios';
-import { User } from '../../contexts';
-import { Register, Login } from '../../contexts';
+import { AxiosInstance } from 'axios';
+import { Toaster } from 'react-hot-toast';
 
 export type LaunchKitConfig = {
-  api: {
-    instance: AxiosInstance;
-  };
+  api: AxiosInstance;
   auth: {
-    registerFn: (params: Register) => Promise<
-      AxiosResponse<
-        {
-          jwt: string;
-          user: User;
-        },
-        Register
-      >
-    >;
-    loginFn: (params: Login) => Promise<
-      AxiosResponse<
-        {
-          jwt: string;
-          user: User;
-        },
-        Login
-      >
-    >;
-    getMeFn: () => Promise<AxiosResponse<User, any>>;
+    usersMePath: string;
     logoutRedirect: string;
   };
 };
@@ -41,8 +20,15 @@ type Props = {
 const LaunchKitProvider = ({ children, config }: Props) => {
   return (
     <BrowserRouter>
-      <AuthProvider api={config.api.instance} {...config.auth}>
+      <AuthProvider api={config.api} {...config.auth}>
         {children}
+        <Toaster
+          toastOptions={{
+            style: {
+              fontFamily: 'Arial',
+            },
+          }}
+        />
       </AuthProvider>
     </BrowserRouter>
   );
